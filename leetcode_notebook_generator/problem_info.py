@@ -10,9 +10,9 @@ class Problem:
     solution_code: str
 
     def generate_imports(self) -> str:
-        pattern = r"\b(List|Tuple|Dict|Set)\b(?=.*\b\1\b)"
+        pattern = r"\b(List|Tuple|Dict|Set)\b"
         matches = re.findall(pattern, self.solution_code)
-        return "from typing import " + ", ".join((matches))
+        return "from typing import " + ", ".join(set(matches))
 
     def get_function_name(self) -> str:
         pattern = r"def\s+(\w+)\s*\("
