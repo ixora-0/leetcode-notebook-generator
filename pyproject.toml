@@ -6,6 +6,9 @@ authors = ["ixora-0 <phunglegend.2004@gmail.com>"]
 license = "GPL-3.0-or-later"
 readme = "README.md"
 
+[tool.poetry.scripts]
+generate = "leetcode_notebook_generator.main:main"
+
 [tool.poetry.dependencies]
 python = "^3.11"
 beautifulsoup4 = "^4.12.2"

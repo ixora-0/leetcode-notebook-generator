@@ -1,11 +1,12 @@
 import re
 
-from notebook_generator import generate_notebook
-from web_scraper import scrape_leetcode_problem
+from leetcode_notebook_generator.notebook_generator import generate_notebook
+from leetcode_notebook_generator.web_scraper import scrape_leetcode_problem
 
 DESTINATION_DIR = "./output/"
 
-if __name__ == "__main__":
+
+def main():
     while True:
         leetcode_url = input("Enter URL: ")
 
@@ -21,3 +22,7 @@ if __name__ == "__main__":
 
     print("Generating note book")
     generate_notebook(problem, DESTINATION_DIR)
+
+
+if __name__ == "__main__":
+    main()

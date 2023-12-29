@@ -2,7 +2,7 @@ import os
 
 import nbformat as nbf
 
-from problem_info import Problem
+from leetcode_notebook_generator.problem_info import Problem
 
 
 def generate_notebook(problem: Problem, destination: str):

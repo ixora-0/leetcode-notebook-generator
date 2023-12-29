@@ -9,7 +9,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
-from problem_info import Problem
+from leetcode_notebook_generator.problem_info import Problem
 
 MAX_SECS = 10
 EXPLICIT_WAIT_SECS = 1
