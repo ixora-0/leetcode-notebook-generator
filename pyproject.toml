@@ -7,7 +7,7 @@ license = "GPL-3.0-or-later"
 readme = "README.md"
 
 [tool.poetry.scripts]
-generate = "leetcode_notebook_generator.main:main"
+generate = "leetcode_notebook_generator.__main__:main"
 
 [tool.poetry.dependencies]
 python = "^3.11"
