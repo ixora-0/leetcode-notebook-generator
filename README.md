@@ -11,7 +11,7 @@ A Python script to simplify LeetCode problem-solving by generating a Jupyter Not
 2. Install dependencies
 ### Using [poetry](https://python-poetry.org/docs/)
    ```bash
-   poetry install --no-root
+   poetry install
    ```
 ### Using pip
    ```bash
