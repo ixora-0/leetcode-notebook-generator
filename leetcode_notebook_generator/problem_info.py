@@ -9,9 +9,11 @@ class Problem:
     test_cases: List[Dict[str, str]]
     solution_code: str
 
-    def generate_imports(self) -> str:
+    def generate_imports(self) -> str | None:
         pattern = r"\b(List|Tuple|Dict|Set)\b"
-        matches = re.findall(pattern, self.solution_code)
+        matches = set(re.findall(pattern, self.solution_code))
+        if not matches:
+            return None
         return "from typing import " + ", ".join(set(matches))
 
     def get_function_name(self) -> str:

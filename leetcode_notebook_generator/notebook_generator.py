@@ -24,8 +24,10 @@ def generate_notebook(problem: Problem, destination: str):
     nb.cells.append(problem_title_cell)
 
     # importing types
-    import_cell = nbf.v4.new_code_cell(problem.generate_imports())
-    nb.cells.append(import_cell)
+    import_txt = problem.generate_imports()
+    if import_txt is not None:
+        import_cell = nbf.v4.new_code_cell(import_txt)
+        nb.cells.append(import_cell)
 
     # Solution Class
     solution_cell = nbf.v4.new_code_cell(problem.solution_code)
