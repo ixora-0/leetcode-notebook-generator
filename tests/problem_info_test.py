@@ -5,7 +5,7 @@ from . import problem_expectations
 
 def test_problem_info():
     for p in problem_expectations:
-        print(f"Testing problem info for proble: {p.title}")
+        print(f"Testing problem info for problem: {p.title}")
         problem = Problem(
             title=p.title, test_cases=p.test_cases, solution_code=p.solution_code
         )
