@@ -85,8 +85,16 @@ def scrape_leetcode_problem(url: str) -> Problem:
         )
     )
     # Get text in code area
-    code_lines = code_area.text.split("\n")
-    code = code_lines[0] + "\n" + "".join(code_lines[1:])
+    # ignores comments
+    code_lines = list(filter(lambda line: line[0] != "#", code_area.text.split("\n")))
+    code = (
+        code_lines[0]
+        + "\n"
+        + "".join(code_lines[1:-1])
+        + "\n"
+        + code_lines[-1]
+        + "pass"
+    )
     print(f"Extracted code:\n{code}")
 
     # EXTRACT TEST CASES #######################################
