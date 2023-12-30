@@ -130,7 +130,7 @@ def scrape_leetcode_problem(url: str) -> Problem:
         soup = BeautifulSoup(html_content, "html.parser")
         # Find all divs that looks like "{name} ="
         names_divs = soup.find_all(
-            "div", text=lambda t: t is not None and str(t).strip().endswith("=")
+            "div", string=lambda t: t is not None and str(t).strip().endswith("=")
         )
 
         parameters = {}
