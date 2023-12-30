@@ -10,7 +10,7 @@ class Problem:
     solution_code: str
 
     def generate_imports(self) -> str | None:
-        pattern = r"\b(List|Tuple|Dict|Set)\b"
+        pattern = r"\b(List|Tuple|Dict|Set|Optional)\b"
         matches = set(re.findall(pattern, self.solution_code))
         if not matches:
             return None
