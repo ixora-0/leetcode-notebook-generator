@@ -46,7 +46,7 @@ def scrape_leetcode_problem(url: str) -> Problem:
     print("Extracting title")
     # Get title using css classes (probably suboptimal)
     title_anchor = wait.until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, "a.text-label-1.font-medium"))
+        EC.presence_of_element_located((By.CSS_SELECTOR, "a.no-underline.cursor-text"))
     )
     title = title_anchor.get_property("textContent")
     print(f"Title is detected to be: {title}")
