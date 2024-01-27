@@ -4,6 +4,9 @@ import time
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 from selenium import webdriver
+from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
@@ -38,6 +41,23 @@ def scrape_leetcode_problem(url: str) -> Problem:
     # Open the LeetCode site
     print("Getting leetcode site")
     driver.get(url)
+    time.sleep(EXPLICIT_WAIT_SECS)
+
+    try:
+        # Go through dynamic layout walkthrough
+        button = driver.find_element(
+            By.XPATH, "//button[contains(text(), 'Enable Dynamic Layout')]"
+        )
+        button.click()
+        print("Skipping dynamic layout walktrhough")
+        button = wait.until(
+            EC.visibility_of_element_located((By.XPATH, '//button[@title="Skip"]'))
+        )
+        button.click()
+
+    except NoSuchElementException:
+        # No dynamic layout walkthrough
+        pass
 
     # EXTRACT TITLE ############################################
     print("Extracting title")
@@ -45,21 +65,17 @@ def scrape_leetcode_problem(url: str) -> Problem:
     title_anchor = wait.until(
         EC.presence_of_element_located((By.CSS_SELECTOR, "a.text-label-1.font-medium"))
     )
-    title = title_anchor.text
+    title = title_anchor.get_property("textContent")
     print(f"Title is detected to be: {title}")
 
     # EXTRACT CODE IN TEXT AREA ################################
     print("Changing language")
     reveal_langs_button = wait.until(
-        EC.presence_of_element_located(
-            (By.CSS_SELECTOR, "[id^='headlessui-listbox-button-']")
-        )
+        EC.presence_of_element_located((By.CSS_SELECTOR, "button.rounded.px-1\\.5"))
     )
     reveal_langs_button.click()
     time.sleep(0.2)
-    lang_buttons = driver.find_elements(
-        By.CSS_SELECTOR, "[id^='headlessui-listbox-option-']"
-    )
+    lang_buttons = driver.find_elements(By.CSS_SELECTOR, "div.cursor-pointer.pr-3")
     python_button = None
     for button in lang_buttons:
         try:
@@ -98,12 +114,14 @@ def scrape_leetcode_problem(url: str) -> Problem:
     print(f"Extracted code:\n{code}")
 
     # EXTRACT TEST CASES #######################################
-    # Click console button to reveal the test cases
+    # Double click console button to reveal the test cases
     print("Clicking console button")
     console_button = driver.find_element(
-        By.XPATH, "//button[@data-e2e-locator='console-console-button']"
+        By.XPATH, '//div[@data-layout-path="/c1/ts1/tb0"]'
     )
-    console_button.click()
+    action_chains = ActionChains(driver)
+    action_chains.double_click(console_button).perform()
+
     html_content = driver.page_source
     soup = BeautifulSoup(html_content, "html.parser")
     print("Waiting for test case buttons")
