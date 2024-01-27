@@ -45,11 +45,11 @@ def scrape_leetcode_problem(url: str) -> Problem:
 
     try:
         # Go through dynamic layout walkthrough
-        button = driver.find_element(
-            By.XPATH, "//button[contains(text(), 'Enable Dynamic Layout')]"
+        button = wait.until (
+            EC.visibility_of_element_located((By.XPATH, "//button[contains(text(), 'Enable Dynamic Layout')]"))
         )
-        button.click()
         print("Skipping dynamic layout walktrhough")
+        button.click()
         button = wait.until(
             EC.visibility_of_element_located((By.XPATH, '//button[@title="Skip"]'))
         )
