@@ -2,7 +2,6 @@ import os
 import time
 
 from bs4 import BeautifulSoup
-from dotenv import load_dotenv
 from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.action_chains import ActionChains
@@ -19,29 +18,13 @@ EXPLICIT_WAIT_SECS = 1
 
 
 def scrape_leetcode_problem(url: str) -> Problem:
-    # Load environment variables from .env file
-    load_dotenv()
-
-    # Get WebDriver path from environment variable
-    chrome_driver_path = os.getenv("CHROME_DRIVER_PATH")
-    if chrome_driver_path is None:
-        print("Can't find chrome driver's path in .env")
-        exit(1)
-    print("Loaded driver path")
-
-    # Set up Chrome options
-    chrome_options = webdriver.ChromeOptions()
-
-    # Initialize Chrome WebDriver
-    service = Service(chrome_driver_path)
-    driver = webdriver.Chrome(service=service, options=chrome_options)
+    driver = webdriver.Firefox()
     wait = WebDriverWait(driver, MAX_SECS)
-    print("Initialized Chrome WebDriver")
+    print("Initialized Firefox WebDriver")
 
     # Open the LeetCode site
     print("Getting leetcode site")
     driver.get(url)
-    time.sleep(EXPLICIT_WAIT_SECS)
 
     try:
         # Go through dynamic layout walkthrough

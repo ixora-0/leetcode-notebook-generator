@@ -2,7 +2,7 @@
 
 A Python script to simplify [LeetCode](https://leetcode.com/) problem-solving by generating a Jupyter Notebook template from problem URLs.
 ## ‼️Method
-This uses [selenium](https://www.selenium.dev/) to scrape from LeetCode. Since there's no LeetCode API that we could use, and headless requests don't give us the whole site, we have to launch a browser instance using selenium and get the information about the problem through that browser. Therefore we also need to install a [webdriver](https://www.selenium.dev/documentation/webdriver/).
+This uses [selenium](https://www.selenium.dev/) to scrape from LeetCode. Since there's no LeetCode API that we could use, and headless requests don't give us the whole site, we have to launch a browser instance using selenium and get the information about the problem through that browser. 
 
 ## Installation
 1. Clone the repository:
@@ -10,12 +10,7 @@ This uses [selenium](https://www.selenium.dev/) to scrape from LeetCode. Since t
    git clone https://github.com/ixora-0/leetcode-notebook-generator.git
    cd leetcode-notebook-generator
    ```
-2. Install [Google Chrome](https://www.google.com/chrome/) and the appropriate [ChromeDriver](https://chromedriver.chromium.org/downloads), then add the path to `.env` in the repository like so:
-```env
-# in /.env
-CHROME_DRIVER_PATH=/usr/bin/chromedriver  # replace with your path to the driver
-```
-3. Install dependencies
+2. Install dependencies
 ### Using [poetry](https://python-poetry.org/docs/)
    ```bash
    poetry install
